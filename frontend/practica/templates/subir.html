@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir XML</title>
+</head>
+<body>
+    <h1>Subir archivo XML</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="archivo" accept=".xml">
+        <button type="submit">Subir archivo</button>
+    </form>
+</body>
+</html>
