@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
-import xml.etree.ElementTree as ET
+
+import backend2 as b2
 
 app = Flask(__name__)
 
-@app.route('/subir-xml', methods=['POST'])
+@app.route('/carga', methods=['POST'])
 def subir_xml():
     if 'archivo' not in request.files:
         return jsonify({'error': 'No se subió ningún archivo XML'}), 400
@@ -12,10 +13,16 @@ def subir_xml():
     if archivo.filename == '':
         return jsonify({'error': 'El nombre del archivo está vacío'}), 400
 
+    contenido = archivo.read().decode('utf-8')
+    print(contenido)
+
+    b2.crearSalida(contenido)
     try:
         # Parsear el archivo XML
-        tree = ET.parse(archivo)
+        #print(archivo) 
+        tree = ET.parse(contenido)
         root = tree.getroot()
+
 
         # Extraer los datos (ajustar según la estructura del XML)
         datos = [float(item.find('valor').text) for item in root.findall('.//item')]
