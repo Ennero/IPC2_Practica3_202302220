@@ -17,8 +17,9 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from practica import views
+from MiApp import views
 
 urlpatterns = [
-    path('subir/', views.subir_y_mostrar, name='subir'),
+    path("admin/", admin.site.urls),
+    path('', views.carga),
 ]
