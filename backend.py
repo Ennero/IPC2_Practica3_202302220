@@ -6,32 +6,32 @@ app = Flask(__name__)
 
 @app.route('/carga', methods=['POST'])
 def subir_xml():
-    if 'archivo' not in request.files:
-        return jsonify({'error': 'No se subió ningún archivo XML'}), 400
+    if 'archivo' not in request.files:  # Si no se subió ningún archivo
+        return jsonify({'error': 'No se subió ningún archivo XML'}), 400 # Bad request
 
-    archivo = request.files['archivo']
-    if archivo.filename == '':
+    archivo = request.files['archivo'] # Se obtiene el archivo XML
+
+    if archivo.filename == '': # Si el nombre del archivo está vacío
         return jsonify({'error': 'El nombre del archivo está vacío'}), 400
 
-    contenido = archivo.read().decode('utf-8')
-    print(contenido)
+    contenido = archivo.read().decode('utf-8') # Se lee el contenido del archivo XML
 
-    b2.crearSalida(contenido)
-    try:
-        # Parsear el archivo XML
-        #print(archivo) 
-        tree = ET.parse(contenido)
-        root = tree.getroot()
+    b2.crearSalida(contenido) # Se crea el archivo de salida
+    return jsonify({'mensaje': 'Archivo XML recibido correctamente'}), 200
+    
 
+@app.route('/grafica', methods=['POST'])
+def grafico():
+    if 'salida' not in request.files:  # Si no se subió ningún archivo
+        return jsonify({'error': 'No se subió ningún archivo XML'}), 400 # Bad request
+    
+    salida=request.files['salida']
 
-        # Extraer los datos (ajustar según la estructura del XML)
-        datos = [float(item.find('valor').text) for item in root.findall('.//item')]
+    if salida.filename == '': # Si el nombre del archivo está vacío
+        return jsonify({'error': 'El nombre del archivo está vacío'}), 400
 
-        # Devolver los datos como JSON
-        return jsonify(datos), 200
+    return b2.grafico()
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
