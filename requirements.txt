@@ -1,0 +1,4 @@
+Django>=5.2.8,<5.3
+Flask>=3.1,<4
+plotly>=6,<7
+requests>=2.32,<3

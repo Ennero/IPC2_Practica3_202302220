@@ -1,68 +1,38 @@
-<div align="center">
+# Ventas por departamento desde XML con Flask y Django
 
-# 📄 XML Data Parser and Structure Generator in Python (IPC2)
+API Flask para procesar archivos XML y generar un resumen de ventas por departamento, con gráficas Plotly y un frontend Django para cargar y consultar los resultados.
 
-**Parser e intérprete de archivos XML para carga masiva de datos y generación de estructuras enlazadas en Python.**
+## Requisitos
 
-[![Language](https://img.shields.io/badge/Language-Python-blue?style=for-the-badge)](https://github.com/Ennero/IPC2_Practica3_202302220)
-[![Course](https://img.shields.io/badge/Course-Introducción%20a%20la%20Programación%20y%20Computación%202-003366?style=for-the-badge)](https://ingenieria.usac.edu.gt/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+Python 3.12 o superior y requirements.txt. Backend y frontend se ejecutan como dos procesos; Django usa SQLite local.
 
-</div>
+## Ejecución
 
----
+Los comandos parten de la raíz del repositorio, salvo donde se indica otra terminal.
 
+```bash
+python -m pip install -r requirements.txt
+python backend.py
 
-## 📌 Descripción General
-
-Este repositorio contiene la implementación y entrega de **📄 XML Data Parser and Structure Generator in Python (IPC2)**, desarrollado en el curso de **Introducción a la Programación y Computación 2** en la Universidad de San Carlos de Guatemala.
-
-- **Objetivo:** Parser e intérprete de archivos XML para carga masiva de datos y generación de estructuras enlazadas en Python.
-- **Stack Principal:** `Python`.
-- **Área:** Ciencias de la Computación, Algoritmos y Desarrollo de Software.
-
----
-
-## 🚀 Características y Componentes
-
-- Implementación modular y buenas prácticas de codificación.
-- Manejo estructurado de datos, control de flujo y validaciones.
-- Documentación y scripts de soporte para compilación o ejecución.
-
----
-
-## 📦 Estructura del Proyecto
-
-```
-IPC2_Practica3_202302220/
-├── src/ o archivos de código fuente
-├── docs/ (si aplica)
-├── .gitignore
-├── LICENSE
-└── README.md
+# Otra terminal, desde la raíz:
+python manage.py migrate
+python manage.py runserver 127.0.0.1:8000
 ```
 
----
+## Recorrido de demostración
 
-## ⚙️ Requisitos y Ejecución
+Abrir http://127.0.0.1:8000, cargar uno de los XML de archivosPrueba/ y consultar el resumen o la gráfica. El frontend llama a Flask en http://127.0.0.1:5000.
 
-1. Clonar el repositorio:
-   ```bash
-   git clone https://github.com/Ennero/IPC2_Practica3_202302220.git
-   cd IPC2_Practica3_202302220
-   ```
-2. Ejecutar según el entorno (`Python`):
-   - Consultar los scripts o archivos principales del proyecto para parámetros específicos.
+## Organización
 
----
+Carpetas de la entrega: [`MiApp/`](MiApp/), [`archivosPrueba/`](archivosPrueba/), [`frontend/`](frontend/).
 
-## 📄 Licencia
+## Alcance y límites
 
-Este proyecto está bajo la Licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Los archivos salida.xml se generan en la carpeta de ejecución. SQLite se crea con migrate y no se distribuye una copia personal. Los datos y gráficos dependen del último XML cargado.
 
----
+## Contexto y licencia
 
-## 👨‍💻 Autor
+Trabajo académico o de aprendizaje conservado en el portafolio de [Enner Mendizabal](https://github.com/Ennero). Los créditos de los trabajos en grupo se conservan en sus entregas y manuales.
 
-- **Enner Mendizabal** - [@Ennero](https://github.com/Ennero)  
-- *Facultad de Ingeniería, Universidad de San Carlos de Guatemala.*
+Consultar [LICENSE](LICENSE) para la licencia de la raíz. Las dependencias y los componentes con avisos o licencias propios conservan sus condiciones.
